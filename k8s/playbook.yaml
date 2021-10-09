@@ -1,5 +1,5 @@
 ---
-- hosts: k8snode03     #定义需要执行主机
+- hosts: k8m01     #定义需要执行主机
   remote_user: root       #远程用户
   vars:                   #定义变量
    #http_port: 8088       #变量
@@ -29,6 +29,8 @@
 #         replace: '#.+swap'
      - name: install docker
        script: get-docker.sh 
+     - name: start docker service
+       service: name=docker state=started enabled=yes
      - name: install kube tools
        yum:
          name: ['kubelet-1.20.0', 'kubeadm-1.20.0', 'kubectl-1.20.0']
